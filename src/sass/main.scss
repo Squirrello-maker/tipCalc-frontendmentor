@@ -16,7 +16,7 @@ body
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 105vh;
     font-family: 'Space Mono', monospace;
     font-size: 2.4rem;
     background-color: $light-grayish-cyan;
@@ -32,6 +32,7 @@ body
 {
 
     padding: 1em;
+    width: 100%;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     background-color: #fff;
@@ -59,7 +60,6 @@ body
     {
         display: grid;
         grid-template-columns: repeat(2, 50%);
-
         &-btn
         {
             margin: .5em .5em;
@@ -82,18 +82,78 @@ body
     }
     &__custom
     {
+        margin: auto 0;
+        padding: .35em ;
+        height: 40.5px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        background-color: $lighter-grayish-cyan;
+        color: $v-dark-cyan;
+        font-family: 'Space Mono', monospace;
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-align: right;
         &::placeholder
         {
             font-family: 'Space Mono', monospace; 
+            font-size: 1.8rem;
+            font-weight: 700;
             text-align: right;
         }
     }
+    &__result
+    {
+        position: relative;
+        padding: 1em .5em;
+        background-color: $v-dark-cyan;
+        color: $lighter-grayish-cyan;
+        border-radius: 20px;
+        &-tip, &-total
+        {
+            position: relative;
+            margin: 1em 0 2em;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        &-tip::after, &-total::after
+        {
+            content: '/ person';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            font-size: 1.2rem;
+            color: $dark-grayish-cyan
+        }
+    }
 }
-.section
+.tip-value
 {
-    background-color: $v-dark-cyan;
-    color: $lighter-grayish-cyan;
-    border-radius: 20px;
+    position: absolute;
+    right: 0;
+    font-size: 3rem;
+    color: $strong-cyan;
 }
-
+.dollar-result
+{
+    path
+    {
+        fill: $strong-cyan;
+    }
+}
+.btn-reset
+{
+    position: relative;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 1em 2em;
+    background-color: $strong-cyan;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: $v-dark-cyan;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 700;
+}
 @import './desktop';
