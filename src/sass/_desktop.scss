@@ -1,0 +1,23 @@
+@media (min-width: 992px)
+{
+    .app
+    {
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(3, 1fr);
+        width: 80%;
+        border-radius: 20px;
+        &__tips
+        {
+            grid-row: 2;
+        }
+        &__people
+        {
+            grid-row: 3;
+        }
+        &__result
+        {
+            grid-row: span 3;
+        }
+    }
+}
