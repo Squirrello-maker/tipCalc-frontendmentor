@@ -35,6 +35,30 @@ body
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     background-color: #fff;
+    &__bills, &__people
+    {
+        position: relative;
+    }
+    &__bills
+    {
+        &-icon
+        {
+            position: absolute;
+            top: 52%;
+            left: 6%;
+            transform: translateY(-50%);
+        }
+    }
+    &__people
+    {
+        &-icon
+        {
+            position: absolute;
+            top: 42.5%;
+            left: 6%;
+            transform: translateY(-50%);
+        }
+    }
     &__bill, &__tip
     {
         display: block;
@@ -44,6 +68,7 @@ body
     }
     &__people
     {
+        position: relative;
         font-size: 1.8rem;
         font-weight: 700;
         color: $darker-grayish-cyan;
@@ -96,7 +121,7 @@ body
     }
     &__custom
     {
-        margin: auto 0;
+        margin: auto .5em;
         padding: .35em ;
         height: 40.5px;
         border: 1px solid transparent;
@@ -183,12 +208,18 @@ body
 {
     display: none;
     position: absolute;
-    right: 25px;
+    right: 0;
     font-size: 1.6rem;
     color: rgb(207, 5, 5);
 }
 .fail
 {
     display: inline;
+}
+.fail-desktop
+{
+    display: block;
+    position: relative;
+    margin-bottom: 1em;
 }
 @import './desktop';
