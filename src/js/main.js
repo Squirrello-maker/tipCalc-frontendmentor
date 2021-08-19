@@ -9,6 +9,7 @@ const totalValue = document.querySelector('.total-value');
 const tipBtns = document.querySelectorAll('.app__tips-btn');
 
 let currentTip;
+let totalTip = 0;
 
 const setBtnTip = e => {
     if(e.target.textContent.length <= 2)
@@ -20,9 +21,28 @@ const setBtnTip = e => {
         currentTip = e.target.textContent.slice(0, 2);
     }
     currentTip = (parseInt(currentTip)/100);
+    calc();
 }
-const setCustomTip = (params) => {
-    
+const setCustomTip = e => {
+    if(e.target.value == "" || e.target.value > 100)
+    {
+        return;
+    }
+    currentTip = e.target.value;
+    currentTip = (parseInt(currentTip)/100);
+    calc();
+}
+const calc = () => {
+    let tipText = parseFloat((billInput.value*currentTip/peopleInput.value).toFixed(2));
+    console.log(tipText);
+    tipValue.textContent = tipText; //zaokrągla do 2 miejsc po przecinku
+    totalTip = 0;
+    for(let i = 0; i < peopleInput.value; i++)
+    {
+         totalTip += tipText; 
+    }
+    totalTip.toFixed(2);
+    totalValue.textContent = totalTip;
 }
 const handleZeroError = () => {
     if(window.innerWidth < 992)
@@ -40,6 +60,7 @@ const handleZeroError = () => {
 }
 // handleZeroError()
 tipBtns.forEach(btn => {
-    btn.addEventListener('click', setTip);
+    btn.addEventListener('click', setBtnTip);
 });
-customValue.addEventListener('input', setBtnTip);
+customValue.addEventListener('input', setCustomTip);
+peopleInput.addEventListener('input', calc);
