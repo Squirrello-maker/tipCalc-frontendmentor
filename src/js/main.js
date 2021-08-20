@@ -33,34 +33,69 @@ const setCustomTip = e => {
     calc();
 }
 const calc = () => {
-    let tipText = parseFloat((billInput.value*currentTip/peopleInput.value).toFixed(2));
-    console.log(tipText);
-    tipValue.textContent = tipText; //zaokrągla do 2 miejsc po przecinku
-    totalTip = 0;
-    for(let i = 0; i < peopleInput.value; i++)
+    if(billInput.value == '' || currentTip == null || peopleInput.value == "")
     {
-         totalTip += tipText; 
+        tipValue.textContent = "0.00";
+        totalValue.textContent = "0.00";
+        return;
     }
-    totalTip.toFixed(2);
+    let bill = parseFloat(billInput.value);
+    let tipAmount =  parseFloat((billInput.value*currentTip).toFixed(2));
+    tipValue.textContent = parseFloat((tipAmount/peopleInput.value).toFixed(2)); //zaokrągla do 2 miejsc po przecinku
+    totalTip = ((bill + tipAmount)/peopleInput.value).toFixed(2);
     totalValue.textContent = totalTip;
 }
 const handleZeroError = () => {
     if(window.innerWidth < 992)
     {
-        const error = document.createElement('p');
-        error.textContent = "Can't be zero";
-        error.classList.add('zero-error');
-        error.classList.add('fail-desktop');
-        peopleSection.appendChild(error);
+
+        if(peopleInput.value  < 1)
+        {
+
+            const error = document.createElement('p');
+            error.textContent = "Can't be zero";
+            error.classList.add('zero-error');
+            error.classList.add('fail-desktop');
+            peopleSection.appendChild(error);
+            tipValue.textContent = "0.00";
+            totalValue.textContent = "0.00";
+        }
+        else
+        {
+           peopleSection.querySelector('.zero-error').remove();     
+        }
     }
     else
     {
-        zeroError.classList.toggle('fail');
+        if(peopleInput.value < 1)
+        {
+            zeroError.classList.add('fail');
+        }
+        else
+        {
+            zeroError.classList.remove('fail');
+        }
+        
     }
 }
-// handleZeroError()
+
+const resetApp = () => {
+    currentTip = 0;
+    totalTip = 0.00;
+    billInput.value = "";
+    customValue.value = "";
+    peopleInput.value = "";
+    tipValue.textContent = "0.00";
+    totalValue.textContent = "0.00";
+    zeroError.classList.remove('fail');
+    zeroError.classList.remove('fail-desktop');
+
+}
 tipBtns.forEach(btn => {
     btn.addEventListener('click', setBtnTip);
 });
 customValue.addEventListener('input', setCustomTip);
+billInput.addEventListener('input', calc);
 peopleInput.addEventListener('input', calc);
+peopleInput.addEventListener('input', handleZeroError);
+resetBtn.addEventListener('click', resetApp)
